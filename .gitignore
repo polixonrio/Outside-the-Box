@@ -3,7 +3,6 @@ test/
 log_novelty_variation.txt
 .venv/
 models/new
-models/original
 .vscode/
 __pycache__/
 *.py[cod]
