@@ -98,7 +98,8 @@ def number_of_classes(classes):
 
 
 def number_of_model_classes(model):
-    return model.layers[-1].output_shape[1]
+    # return model.layers[-1].output_shape[1]  # Old method - output_shape attribute deprecated
+    return model.layers[-1].output.shape[1]  # Updated to modern TensorFlow - use output.shape
 
 
 def rate_fraction(num, den):
@@ -293,7 +294,9 @@ def number_of_hidden_neurons(model):
     for layer_idx in range(1, len(model.layers) - 1):
         layer = model.layers[layer_idx]
         prod = 1
-        for j in range(1, len(layer.output_shape)):
-            prod *= layer.output_shape[j]
+        # for j in range(1, len(layer.output_shape)):  # Old method - output_shape attribute deprecated
+        #     prod *= layer.output_shape[j]  # Old method - output_shape attribute deprecated
+        for j in range(1, len(layer.output.shape)):  # Updated to modern TensorFlow - use output.shape
+            prod *= layer.output.shape[j]  # Updated to modern TensorFlow - use output.shape
         n += prod
     return n

@@ -81,7 +81,8 @@ class Monitor(object):
             layer_normalized = normalize_layer(model, layer)
 
             # obtain number of neurons
-            n_neurons = model.layers[layer_normalized].output_shape[1]
+            # n_neurons = model.layers[layer_normalized].output_shape[1]  # Old method - output_shape attribute deprecated
+            n_neurons = model.layers[layer_normalized].output.shape[1]  # Updated to modern TensorFlow - use output.shape
 
             # normalize abstraction (wrap in AbstractionVectors)
             if isinstance(abstraction, AbstractionVector):
