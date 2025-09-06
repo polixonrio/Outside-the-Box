@@ -19,7 +19,8 @@ def load_data(data_train_model: DataSpec, data_test_model: DataSpec, data_train_
             if ds.file is None:
                 raise(ValueError("Got a DataSpec with neither data nor a file name specified!"))
 
-            file = "../" + ds.file  # go up one folder because run scripts are started from the folder "run/"
+            # file = "../" + ds.file  # go up one folder because run scripts are started from the folder "run/"  # Old path for running from run folder
+            file = "./" + ds.file  # Fixed path for running from root directory
             with open(file, mode='rb') as f:
                 data = load(f)
                 ds.set_data(data=data)

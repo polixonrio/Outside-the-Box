@@ -15,14 +15,16 @@ def initialize_subplots(n_subplots, title):
     fig, ax = plt.subplots(nrows=n_rows, ncols=n_cols, squeeze=False)
     row = 0
     col = -1
-    fig.canvas.set_window_title(title)
+    # fig.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    fig.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
     fig.suptitle(title)
     return fig, ax, n_cols, row, col
 
 
 def initialize_single_plot(title):
     fig, ax = plt.subplots()
-    fig.canvas.set_window_title(title)
+    # fig.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    fig.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
     return fig, ax
 
 
