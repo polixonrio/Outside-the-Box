@@ -1,5 +1,7 @@
-from tensorflow_core.python.keras.models import Sequential
-from tensorflow_core.python.keras.layers import Convolution2D, Dense, MaxPooling2D, Flatten
+# from tensorflow_core.python.keras.models import Sequential  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.layers import Convolution2D, Dense, MaxPooling2D, Flatten  # Old tensorflow_core import was outdated
+from tensorflow.keras.models import Sequential  # Updated to modern TensorFlow import
+from tensorflow.keras.layers import Convolution2D, Dense, MaxPooling2D, Flatten  # Updated to modern TensorFlow import
 
 
 # Note: 'weights' is ignored and just present for compatibility with other networks

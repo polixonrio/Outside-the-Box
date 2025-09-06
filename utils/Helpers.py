@@ -6,8 +6,10 @@ import colorsys
 import random
 from copy import copy
 import csv
-from tensorflow_core.python.keras.models import Model
-from tensorflow_core.python.data import Dataset
+# from tensorflow_core.python.keras.models import Model  # Old tensorflow_core imports were outdated
+# from tensorflow_core.python.data import Dataset  # Old tensorflow_core imports were outdated
+from tensorflow.keras.models import Model  # Updated to modern TensorFlow import
+from tensorflow.data import Dataset  # Updated to modern TensorFlow import
 
 from .CoreStatistics import CoreStatistics
 

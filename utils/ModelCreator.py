@@ -1,5 +1,6 @@
 from os.path import isfile
-from tensorflow_core.python.keras.models import load_model as tf_load_model
+# from tensorflow_core.python.keras.models import load_model as tf_load_model  # Old tensorflow_core import was outdated
+from tensorflow.keras.models import load_model as tf_load_model  # Updated to modern TensorFlow import
 from time import time
 
 from utils import *
