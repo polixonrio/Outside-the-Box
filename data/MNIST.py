@@ -113,7 +113,8 @@ def loadData(src, cimg):
             if crow != 28 or ccol != 28:
                 raise Exception('Invalid file: expected 28 rows/cols per image.')
             # Read data.
-            res = np.fromstring(gz.read(cimg * crow * ccol), dtype=np.uint8)
+            # res = np.fromstring(gz.read(cimg * crow * ccol), dtype=np.uint8)  # Removed in newer numpy
+            res = np.frombuffer(gz.read(cimg * crow * ccol), dtype=np.uint8)  # Updated for modern numpy
     finally:
         if DOWNLOAD:
             os.remove(gzfname)
@@ -140,7 +141,8 @@ def loadLabels(src, cimg):
             if n[0] != cimg:
                 raise Exception('Invalid file: expected {0} rows.'.format(cimg))
             # Read labels.
-            res = np.fromstring(gz.read(cimg), dtype=np.uint8)
+            # res = np.fromstring(gz.read(cimg), dtype=np.uint8)  # Removed in newer numpy
+            res = np.frombuffer(gz.read(cimg), dtype=np.uint8)  # Updated for modern numpy
     finally:
         if DOWNLOAD:
             os.remove(gzfname)

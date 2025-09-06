@@ -82,7 +82,8 @@ def get_labels(data_specs):
 
         if len(ds.y().shape) == 1:
             # normalize labels to "categorical vector"
-            ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data), dtype='float32'))
+            # ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data), dtype='float32'))  # Old method with dtype parameter
+            ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data)).astype('float32'))  # Updated for modern TensorFlow with chained astype
         for cd in all_classes_data:
             all_classes_total.add(cd)
 
