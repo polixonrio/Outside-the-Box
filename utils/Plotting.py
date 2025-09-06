@@ -181,7 +181,8 @@ def plot_monitor_training(monitor, history, iterations, scores, best_scores, fp_
         plot_2d_projection(history=history, monitor=monitor, layer=layer, category_title=category_title, ax=ax)
 
     fig, ax = PLOT_MONITOR_RATES_AXIS()
-    fig.canvas.set_window_title("Monitor-training history")
+    # fig.canvas.set_window_title("Monitor-training history")  # Old deprecated method that caused AttributeError in modern matplotlib
+    fig.canvas.manager.set_window_title("Monitor-training history")  # Updated to modern matplotlib approach
 
     # plot rates & score
     ax[0].cla()
@@ -232,7 +233,8 @@ def plot_2d_projection(history, monitor, layer, category_title, ax=None, known_c
     m_id = 0 if monitor is None else monitor.id()
     title = "Projected data & abstractions ({}) (monitor {:d}, layer {:d})".format(category_title, m_id, layer)
     ax.figure.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
     if dimensions is None:
         dimensions = monitor.dimensions(layer)
     x = dimensions[0]
@@ -388,7 +390,8 @@ def plot_novelty_detection(monitors, novelty_wrapper, confidence_thresholds, n_m
             final_name = name
         title = "Novelty detection (monitor {})".format(final_name)
         fig.suptitle(title)
-        ax.figure.canvas.set_window_title(title)
+        # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+        ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
 
     plt.draw()
     plt.pause(0.0001)
@@ -419,7 +422,8 @@ def plot_novelty_detection_given_all_lists(core_statistics_list_of_lists: list, 
     ax.xaxis.set_ticks(xticks)
     title = "Novelty detection {}".format(name)
     fig.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
 
     plt.draw()
     plt.pause(0.0001)
@@ -485,7 +489,8 @@ def _plot_false_decisions_helper(x, xticks, y_fn, y_fp, y_tp, name, name2="", ti
     if title is None:
         title = "Decision performance (monitor {}) {}".format(name, name2)
     fig.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
 
 
 def plot_false_decisions_given_list(core_statistics_list: list, n_ticks, name="", name2=""):
@@ -546,7 +551,8 @@ def plot_false_decisions_given_all_lists(core_statistics_list_of_lists: list, n_
     ax.xaxis.set_ticks(xticks)
     title = "Decision performance {}".format(name)
     fig.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
 
     plt.draw()
     plt.pause(0.0001)
@@ -557,7 +563,8 @@ def plot_false_decisions_legend():
     ax = fig.add_subplot()
     title = "Legend"
     ax.figure.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old deprecated method that caused AttributeError in modern matplotlib
+    ax.figure.canvas.manager.set_window_title(title)  # Updated to modern matplotlib approach
     labels = 'false positives', 'false negatives', 'true positives'
     width = 0.5
 

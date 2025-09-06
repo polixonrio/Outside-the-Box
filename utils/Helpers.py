@@ -133,7 +133,16 @@ def obtain_predictions(model, data, layers=None, ignore_misclassifications: bool
             else:
                 # construct pruned model following
                 # https://keras.io/getting-started/faq/#how-can-i-obtain-the-output-of-an-intermediate-layer
-                model_until_layer = Model(inputs=model.input, outputs=model.layers[layer_index].output)
+                
+                # Original approach (fails with Sequential models that haven't been built):
+                # model_until_layer = Model(inputs=model.input, outputs=model.layers[layer_index].output)
+                
+                # Fixed approach: Use layers[0].input for Sequential models compatibility
+                # This works because layers[0].input gives us the original input tensor that accepts raw data
+                # Both model.input and model.layers[0].input point to the same tensor, but layers[0].input
+                # is more reliable for Sequential models in newer Keras versions
+                # https://stackoverflow.com/questions/78979984/the-layer-sequential-has-never-been-called-and-thus-has-no-defined-input-error-w
+                model_until_layer = Model(inputs=model.layers[0].input, outputs=model.layers[layer_index].output)
                 result = model_until_layer.predict(data.x())
             layer2values[layer_index] = result
         result = layer2values

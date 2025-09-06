@@ -15,6 +15,15 @@ class Logger(object):
         for f in self.files:
             f.flush()
 
+    @property
+    def encoding(self):
+        # Return the encoding of the first file (usually sys.stdout)
+        return getattr(self.files[0], 'encoding', 'utf-8')
+
+    def __getattr__(self, name):
+        # Delegate any other attribute access to the first file (usually sys.stdout)
+        return getattr(self.files[0], name)
+
     @staticmethod
     def start(file):
         f = open(file, "w")

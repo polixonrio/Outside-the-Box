@@ -8,7 +8,14 @@ def test_alpha(model, data, history, alpha):
     n = float(number_of_model_classes(model))
     b = n / (n - 1)
     a = -b
-    confidences = model.predict_proba(data.x())
+    
+    # Original approach (worked in older Keras versions but predict_proba was removed):
+    # confidences = model.predict_proba(data.x())
+    
+    # Updated approach: Use model.predict() which returns the same probability distributions
+    # In newer Keras versions, predict() does what predict_proba() used to do
+    # https://stackoverflow.com/questions/68971378/attributeerror-sequential-object-has-no-attribute-predict-proba
+    confidences = model.predict(data.x())
     predictions = [np.argmax(x) for x in confidences]
     history.set_ground_truths(data.ground_truths())
     history.set_predictions(predictions)

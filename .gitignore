@@ -1,2 +1,11 @@
 data/GTSRB/train.p
+test/
 log_novelty_variation.txt
+.venv/
+models/new
+models/original
+.vscode/
+__pycache__/
+*.py[cod]
+*$py.class
+*.csv
