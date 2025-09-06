@@ -95,7 +95,8 @@ def loadData(src, cimg):
         gzfname, h = urlretrieve(src, './delete.me')
         print('Done.')
     else:
-        gzfname = "../data/MNIST/{}".format(src)
+        # gzfname = "../data/MNIST/{}".format(src)  # Old path was for running from run folder
+        gzfname = "./data/MNIST/{}".format(src)  # Fixed path for running from root directory
 
     try:
         with gzip.open(gzfname) as gz:
@@ -126,7 +127,8 @@ def loadLabels(src, cimg):
         gzfname, h = urlretrieve(src, './delete.me')
         print('Done.')
     else:
-        gzfname = "../data/MNIST/{}".format(src)
+        # gzfname = "../data/MNIST/{}".format(src)  # Old path was for running from run folder
+        gzfname = "./data/MNIST/{}".format(src)  # Fixed path for running from root directory
     try:
         with gzip.open(gzfname) as gz:
             n = struct.unpack('I', gz.read(4))
