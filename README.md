@@ -83,7 +83,7 @@ You can set up the project using either `uv`, `pip`, or Docker.
 Before running any experiment scripts, you must train the required models. Follow these steps:
 
 1. **Train the models:**
-   You must run all training scripts before running the experiment scripts:
+   Normally, you must run all training scripts before running the experiment scripts. However, the repository currently includes pretrained models, so you can run the experiment script directly unless you want to retrain:
    ```bash
    python -B -m run.train_CIFAR
    python -B -m run.train_F_MNIST
