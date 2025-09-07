@@ -34,7 +34,8 @@ def run_training(data_name, data_train_model, data_test_model, model_name, model
         if plot_name != "":
             figs = [plt.figure(n) for n in plt.get_fignums()]
             if len(figs) == 1:
-                figs[0].savefig("../training_{}.pdf".format(plot_name))
+                # figs[0].savefig("../training_{}.pdf".format(plot_name))  # Old path - saved to parent directory
+                figs[0].savefig("./outputs/training_{}.pdf".format(plot_name))  # Updated: Save to outputs folder
                 plt.close()
             else:
                 save_all_figures(figs)

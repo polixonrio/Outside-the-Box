@@ -251,12 +251,14 @@ def classes2string(classes):
 
 def store_core_statistics(storages, name, filename_prefix="results"):
     if isinstance(name, str):
-        filename = "{}-{}.csv".format(filename_prefix, name)
+        # filename = "{}-{}.csv".format(filename_prefix, name)  # Old path - saved to current directory
+        filename = "./outputs/{}-{}.csv".format(filename_prefix, name)  # Updated: Save to outputs folder
         _store_core_statistics_helper(filename, storages)
     else:
         assert isinstance(name, list)
         for storages_alpha, alpha in zip(storages, name):
-            filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))
+            # filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Old path - saved to current directory
+            filename = "./outputs/{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Updated: Save to outputs folder
             _store_core_statistics_helper(filename, storages_alpha)
 
 
@@ -270,14 +272,16 @@ def _store_core_statistics_helper(filename, storages):
 
 def load_core_statistics(name, filename_prefix="results"):
     if isinstance(name, str):
-        filename = "{}-{}.csv".format(filename_prefix, name)
+        # filename = "{}-{}.csv".format(filename_prefix, name)  # Old path - loaded from current directory
+        filename = "./outputs/{}-{}.csv".format(filename_prefix, name)  # Updated: Load from outputs folder
         storages = _load_core_statistics_helper(filename)
         return storages
     else:
         assert isinstance(name, list)
         storages_all = []
         for alpha in name:
-            filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))
+            # filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Old path - loaded from current directory
+            filename = "./outputs/{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Updated: Load from outputs folder
             storages = _load_core_statistics_helper(filename)
             storages_all.append(storages)
         return storages_all

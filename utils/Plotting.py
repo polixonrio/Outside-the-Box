@@ -679,6 +679,7 @@ def save_all_figures(figs=None, extension="pdf", close=False):
     if figs is None:
         figs = [plt.figure(n) for n in plt.get_fignums()]
     for fig in figs:  # type
-        fig.savefig("../{}.{}".format(fig._suptitle._text, extension))
+        # fig.savefig("../{}.{}".format(fig._suptitle._text, extension))  # Old path - saved to parent directory
+        fig.savefig("./outputs/{}.{}".format(fig._suptitle._text, extension))  # Updated: Save to outputs folder
         if close:
             plt.close(fig)
