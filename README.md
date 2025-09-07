@@ -90,6 +90,7 @@ Before running any experiment scripts, you must train the required models. Follo
    python -B -m run.train_MNIST
    python -B -m run.train_GTSRB
    ```
+  REMEMBER - Due to Gihub's limitation of the file size, one of the datasets needed to be compressed. To use this dataset, you need to manually go to the folder `data/GTSRB/` and unzip the file `train.zip`.
 
 2. **Run the experiment script:**
    After training, run the experiment script:
@@ -103,7 +104,7 @@ Before running any experiment scripts, you must train the required models. Follo
    - `run_experiment_other_abstractions.py`
 
 
-Refer to the [Evaluation](#evaluation) section below to see which script produces which figure or table from the paper.
+Refer to the [Evaluation](#evaluation) section below to see which script produces which figure from the paper.
 
 ### About the outputs folder
 The `outputs/` directory contains generated results from running experiments and scripts, including:
@@ -111,6 +112,10 @@ The `outputs/` directory contains generated results from running experiments and
 - PDF files with plots and figures
 
 It does not contain the four log files: `log_novelty_variation.txt`, `log_distance.txt`, `log_layer_variation.txt`, and `log_other_abstractions.txt`. These are generated while running the `run_experiment` script.
+
+---
+**The following sections are from the original README.**
+---
 
 # Citation
 
@@ -140,9 +145,9 @@ This repository contains the implementation and data used in the paper [Outside 
 }
 ```
 
-# Installation
+# ~~Installation~~
 
-We use Python 3.6 but other Python versions may work as well. The easiest is to use a conda environment. The package requirements that need to be installed are found in the file `requirements.txt`.
+~~We use Python 3.6 but other Python versions may work as well. The easiest is to use a conda environment. The package requirements that need to be installed are found in the file `requirements.txt`.~~
 
 # Recreation of the results
 
@@ -167,4 +172,4 @@ The scripts to reproduce the figures and tables of the paper are found in the fo
 - Table 2: `plot_legend.py`
 - Figures 5-8 and Table 3: `run_experiments.py` (This script calls scripts for the individual experiments that can also be run in isolation.)
 
-Intermediate results of the experiments are stored in `.csv` files in the `run/` folder. The final plots are stored in the top folder.
+~~Intermediate results of the experiments are stored in `.csv` files in the `run/` folder. The final plots are stored in the top folder.~~
