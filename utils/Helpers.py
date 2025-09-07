@@ -6,8 +6,10 @@ import colorsys
 import random
 from copy import copy
 import csv
-from tensorflow_core.python.keras.models import Model
-from tensorflow_core.python.data import Dataset
+# from tensorflow_core.python.keras.models import Model  # Old tensorflow_core imports were outdated
+# from tensorflow_core.python.data import Dataset  # Old tensorflow_core imports were outdated
+from tensorflow.keras.models import Model  # Updated to modern TensorFlow import
+from tensorflow.data import Dataset  # Updated to modern TensorFlow import
 
 from .CoreStatistics import CoreStatistics
 
@@ -96,7 +98,8 @@ def number_of_classes(classes):
 
 
 def number_of_model_classes(model):
-    return model.layers[-1].output_shape[1]
+    # return model.layers[-1].output_shape[1]  # Old method - output_shape attribute deprecated
+    return model.layers[-1].output.shape[1]  # Updated to modern TensorFlow - use output.shape
 
 
 def rate_fraction(num, den):
@@ -130,7 +133,16 @@ def obtain_predictions(model, data, layers=None, ignore_misclassifications: bool
             else:
                 # construct pruned model following
                 # https://keras.io/getting-started/faq/#how-can-i-obtain-the-output-of-an-intermediate-layer
-                model_until_layer = Model(inputs=model.input, outputs=model.layers[layer_index].output)
+                
+                # Original approach (fails with Sequential models that haven't been built):
+                # model_until_layer = Model(inputs=model.input, outputs=model.layers[layer_index].output)
+                
+                # Fixed approach: Use layers[0].input for Sequential models compatibility
+                # This works because layers[0].input gives us the original input tensor that accepts raw data
+                # Both model.input and model.layers[0].input point to the same tensor, but layers[0].input
+                # is more reliable for Sequential models in newer Keras versions
+                # https://stackoverflow.com/questions/78979984/the-layer-sequential-has-never-been-called-and-thus-has-no-defined-input-error-w
+                model_until_layer = Model(inputs=model.layers[0].input, outputs=model.layers[layer_index].output)
                 result = model_until_layer.predict(data.x())
             layer2values[layer_index] = result
         result = layer2values
@@ -239,12 +251,14 @@ def classes2string(classes):
 
 def store_core_statistics(storages, name, filename_prefix="results"):
     if isinstance(name, str):
-        filename = "{}-{}.csv".format(filename_prefix, name)
+        # filename = "{}-{}.csv".format(filename_prefix, name)  # Old path - saved to current directory
+        filename = "./outputs/{}-{}.csv".format(filename_prefix, name)  # Updated: Save to outputs folder
         _store_core_statistics_helper(filename, storages)
     else:
         assert isinstance(name, list)
         for storages_alpha, alpha in zip(storages, name):
-            filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))
+            # filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Old path - saved to current directory
+            filename = "./outputs/{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Updated: Save to outputs folder
             _store_core_statistics_helper(filename, storages_alpha)
 
 
@@ -258,14 +272,16 @@ def _store_core_statistics_helper(filename, storages):
 
 def load_core_statistics(name, filename_prefix="results"):
     if isinstance(name, str):
-        filename = "{}-{}.csv".format(filename_prefix, name)
+        # filename = "{}-{}.csv".format(filename_prefix, name)  # Old path - loaded from current directory
+        filename = "./outputs/{}-{}.csv".format(filename_prefix, name)  # Updated: Load from outputs folder
         storages = _load_core_statistics_helper(filename)
         return storages
     else:
         assert isinstance(name, list)
         storages_all = []
         for alpha in name:
-            filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))
+            # filename = "{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Old path - loaded from current directory
+            filename = "./outputs/{}-at{}.csv".format(filename_prefix, int(alpha * 100))  # Updated: Load from outputs folder
             storages = _load_core_statistics_helper(filename)
             storages_all.append(storages)
         return storages_all
@@ -291,7 +307,9 @@ def number_of_hidden_neurons(model):
     for layer_idx in range(1, len(model.layers) - 1):
         layer = model.layers[layer_idx]
         prod = 1
-        for j in range(1, len(layer.output_shape)):
-            prod *= layer.output_shape[j]
+        # for j in range(1, len(layer.output_shape)):  # Old method - output_shape attribute deprecated
+        #     prod *= layer.output_shape[j]  # Old method - output_shape attribute deprecated
+        for j in range(1, len(layer.output.shape)):  # Updated to modern TensorFlow - use output.shape
+            prod *= layer.output.shape[j]  # Updated to modern TensorFlow - use output.shape
         n += prod
     return n

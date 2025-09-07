@@ -1,7 +1,11 @@
-from tensorflow_core.python.keras.losses import SparseCategoricalCrossentropy
-from tensorflow_core.python.keras.optimizers import Adam
-from tensorflow_core.python.keras.metrics import Mean, SparseCategoricalAccuracy
-import tensorflow_core as tf
+# from tensorflow_core.python.keras.losses import SparseCategoricalCrossentropy  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.optimizers import Adam  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.metrics import Mean, SparseCategoricalAccuracy  # Old tensorflow_core import was outdated
+# import tensorflow_core as tf  # Old tensorflow_core import was outdated
+from tensorflow.keras.losses import SparseCategoricalCrossentropy  # Updated to modern TensorFlow import
+from tensorflow.keras.optimizers import Adam  # Updated to modern TensorFlow import
+from tensorflow.keras.metrics import Mean, SparseCategoricalAccuracy  # Updated to modern TensorFlow import
+import tensorflow as tf  # Updated to modern TensorFlow import
 
 from .Trainer import Trainer
 from utils import *

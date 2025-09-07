@@ -19,7 +19,8 @@ def load_data(data_train_model: DataSpec, data_test_model: DataSpec, data_train_
             if ds.file is None:
                 raise(ValueError("Got a DataSpec with neither data nor a file name specified!"))
 
-            file = "../" + ds.file  # go up one folder because run scripts are started from the folder "run/"
+            # file = "../" + ds.file  # go up one folder because run scripts are started from the folder "run/"  # Old path for running from run folder
+            file = "./" + ds.file  # Fixed path for running from root directory
             with open(file, mode='rb') as f:
                 data = load(f)
                 ds.set_data(data=data)
@@ -82,7 +83,8 @@ def get_labels(data_specs):
 
         if len(ds.y().shape) == 1:
             # normalize labels to "categorical vector"
-            ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data), dtype='float32'))
+            # ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data), dtype='float32'))  # Old method with dtype parameter
+            ds.set_y(to_categorical(ds.y(), num_classes=number_of_classes(all_classes_data)).astype('float32'))  # Updated for modern TensorFlow with chained astype
         for cd in all_classes_data:
             all_classes_total.add(cd)
 

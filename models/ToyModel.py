@@ -1,5 +1,7 @@
-from tensorflow_core.python.keras.models import Sequential
-from tensorflow_core.python.keras.layers import Dense
+# from tensorflow_core.python.keras.models import Sequential  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.layers import Dense  # Old tensorflow_core import was outdated
+from tensorflow.keras.models import Sequential  # Updated to modern TensorFlow import
+from tensorflow.keras.layers import Dense  # Updated to modern TensorFlow import
 import numpy as np
 
 from . import ManualModel

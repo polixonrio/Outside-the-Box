@@ -1,0 +1,2 @@
+# This file ensures the outputs directory is tracked in Git
+# Generated CSV files and PDF plots will be saved here

@@ -4,6 +4,14 @@ import numpy as np
 class DummyLayer(object):
     def __init__(self, n):
         self.output_shape = [0, n]
+        # Add output property for compatibility with modern TensorFlow layer interface
+        self.output = DummyOutput(n)
+
+
+class DummyOutput(object):
+    """Dummy output object that mimics TensorFlow layer output interface"""
+    def __init__(self, n):
+        self.shape = [None, n]  # First dimension is None for batch size, second is number of neurons
 
 
 class ManualModel(object):

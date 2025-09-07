@@ -32,7 +32,8 @@ class MonitorManager(object):
         self._layers = list(layers)
         print("Watching the following layers:")
         for layer in self._layers:
-            print("- layer {:d} with {:d} neurons".format(layer, model.layers[layer].output_shape[1]))
+            # print("- layer {:d} with {:d} neurons".format(layer, model.layers[layer].output_shape[1]))  # Old method - output_shape attribute deprecated
+            print("- layer {:d} with {:d} neurons".format(layer, model.layers[layer].output.shape[1]))  # Updated to modern TensorFlow - use output.shape
 
     def train(self, model, data_train: DataSpec, data_test: DataSpec, statistics: Statistics,
               ignore_misclassifications=ONLY_LEARN_FROM_CORRECT_CLASSIFICATIONS):
@@ -189,7 +190,8 @@ class MonitorManager(object):
 
     def _determine_zero_filters(self, layer2values: dict, model: Model, data: DataSpec):
         for layer, values in layer2values.items():
-            n_neurons = model.layers[layer].output_shape[1]
+            # n_neurons = model.layers[layer].output_shape[1]  # Old method - output_shape attribute deprecated
+            n_neurons = model.layers[layer].output.shape[1]  # Updated to modern TensorFlow - use output.shape
             self.layer2class2nonzero_mask[layer] = determine_zero_filters(values, data, n_neurons, layer)
 
     def _remove_zero_dimensions(self, layer2values, classes, compute_violation_indices: bool):

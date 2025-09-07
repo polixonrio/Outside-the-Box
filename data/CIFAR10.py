@@ -2,9 +2,12 @@ import numpy as np
 from os import listdir
 import pickle
 from pickle import load, dump
-import tensorflow_core
-from tensorflow_core.python.keras.models import Model
-from tensorflow_core.python.keras.applications.resnet import preprocess_input
+# import tensorflow_core  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.models import Model  # Old tensorflow_core import was outdated
+# from tensorflow_core.python.keras.applications.resnet import preprocess_input  # Old tensorflow_core import was outdated
+import tensorflow as tf  # Updated to modern TensorFlow import
+from tensorflow.keras.models import Model  # Updated to modern TensorFlow import
+from tensorflow.keras.applications.resnet import preprocess_input  # Updated to modern TensorFlow import
 from utils import DataSpec, load_data, filter_labels
 
 
@@ -12,7 +15,8 @@ def load_CIFAR_10(data_train_model: DataSpec, data_test_model: DataSpec, data_tr
                   data_test_monitor: DataSpec, data_run: DataSpec):
     # raise(NotImplementedError("This method was abandoned. Please fix it first before using it."))
 
-    cifar10_dataset_folder_path = "../data/cifar-10-python/cifar-10-batches-py"
+    # cifar10_dataset_folder_path = "../data/cifar-10-python/cifar-10-batches-py"  # Old path was for running from run folder
+    cifar10_dataset_folder_path = "./data/cifar-10-python/cifar-10-batches-py"  # Fixed path for running from root directory
     # preprocess_and_save_data(cifar10_dataset_folder_path, normalize, one_hot_encode)
     n_batches = 5
     x_train = []
@@ -154,8 +158,10 @@ def extract_features(data_path):
         image_id = image1[0]
         if not image1[1] == 'jpg':
             continue
-        image = tensorflow_core.python.keras.preprocessing.image.load_img(filename, target_size=(224, 224))
-        image = tensorflow_core.python.keras.preprocessing.image.img_to_array(image)  # this is (224, 224, 3)
+        # image = tensorflow_core.python.keras.preprocessing.image.load_img(filename, target_size=(224, 224))  # Old tensorflow_core usage was outdated
+        # image = tensorflow_core.python.keras.preprocessing.image.img_to_array(image)  # Old tensorflow_core usage was outdated
+        image = tf.keras.preprocessing.image.load_img(filename, target_size=(224, 224))  # Updated to modern TensorFlow usage
+        image = tf.keras.preprocessing.image.img_to_array(image)  # Updated to modern TensorFlow usage
         image = image.reshape(1, image.shape[0], image.shape[1], image.shape[2])  # this is (1, 224, 224, 3)
         image = preprocess_input(image)
         feature = model.predict(image)
