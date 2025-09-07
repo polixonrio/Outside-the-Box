@@ -77,7 +77,11 @@ You can set up the project using either `uv`, `pip`, or Docker.
 > - TensorFlow no longer supports GPU on Windows. Training and experiments will run on CPU unless you use Docker or Linux.
 > - To use GPU with Docker, you must have compatible CUDA drivers installed on your system.
 > - If running Docker in WSL, you might also need to install the NVIDIA Container Toolkit in your WSL environment to enable GPU support.
-> - CIFAR model training takes a long time (200 epochs) CPU ~ 170 minutes / GPU ~ 50 minutes .
+> - CIFAR model training takes a long time (200 epochs) CPU ~ 170 minutes / GPU ~ 50 minutes.
+> - The repository already contains new pretrained model files for reference.
+> - New trained model files (with `_New.h5` suffix) are added when you run the training scripts and are compatible with the current version of TensorFlow. These are stored in the `models/` folder.
+> - The old original repo's model files are now stored in `models/original/`.
+> - The original pretrained model files (without `_New.h5`) do not work with the current version of TensorFlow. Always use the newly trained models for experiments.
 
 Before running any experiment scripts, you must train the required models. Follow these steps:
 
