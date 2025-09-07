@@ -9,15 +9,12 @@ You can set up the project using either `uv`, `pip`, or Docker.
 ### Using uv
 1. **Install uv:**
    https://docs.astral.sh/uv/getting-started/installation/
-2. **Install dependencies:**
-   ```bash
-   uv pip install -r requirements.txt
-   ```
-3. **Sync environment (creates environment and installs dependencies):**
+
+2. **Create environment and install dependencies:**
    ```bash
    uv sync
    ```
-   This command will create a virtual environment (if needed) and install all dependencies from pyproject.toml.
+   This command will create a virtual environment (if needed) and install all dependencies from pyproject.toml and requirements.txt.
 
    Alternatively, you can run the following commands separately:
    ```bash
@@ -25,7 +22,7 @@ You can set up the project using either `uv`, `pip`, or Docker.
    uv pip install -r requirements.txt
    ```
 
-4. **Run a script:**
+3. **Run a script:**
    ```bash
    uv run -m run.plot_toy_model
    # Or any other script, e.g.:
