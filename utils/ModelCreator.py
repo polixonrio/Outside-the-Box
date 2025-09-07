@@ -18,8 +18,14 @@ def get_model(model_name: str, data_train: DataSpec, data_test: DataSpec, n_clas
         try:
             model, history = load_model(model_path)
             loaded = True
-        except:
-            pass
+        except Exception as e:
+            # Enhanced error handling to show detailed error information
+            # instead of silently failing with bare 'except:'
+            print(f"Failed to load model from {model_path}")
+            print(f"Error: {type(e).__name__}: {e}")
+            print("Will create and train a new model instead")
+            # pass  # Old silent failure - now we show the actual error
+            loaded = False 
 
     if not loaded:
         print("Could not load model", model_path, "- creating and training new model")
