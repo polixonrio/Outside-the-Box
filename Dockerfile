@@ -18,20 +18,25 @@ COPY . .
 # For production, specify the command when running:
 # docker run ... outside-the-box-ngc python run/train_CIFAR.py
 
-# USAGE INSTRUCTIONS:
-# Build: docker build -t outside-the-box-ngc -f Dockerfile .
-# 
-# Production Run:
-# docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm outside-the-box-ngc
+############################################################
+# USAGE INSTRUCTIONS (see README for details):
 #
-# Interactive Development:
-# docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -it -v ${PWD}:/app outside-the-box-ngc bash
+# Build:
+#   docker build -t outside-the-box-ngc -f Dockerfile .
 #
-# Run Specific Script:
-# docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -v ${PWD}:/app outside-the-box-ngc python run/train_CIFAR.py
+# Run a container (interactive development):
+#   docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm outside-the-box-ngc bash
 #
-# NVIDIA Recommended Flags Explained:
-# --gpus all           : Enable access to all GPUs
-# --ipc=host          : Use host IPC for shared memory (faster data loading)
-# --ulimit memlock=-1 : Remove memory lock limits (required for GPU memory pinning)
-# --ulimit stack=...  : Increase stack size for deep neural networks
+# Run a container (interactive development) with live mount (PowerShell):
+#   docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -it -v ${PWD}:/app outside-the-box-ngc bash
+#
+# Run a specific script (PowerShell):
+#   docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -v ${PWD}:/app outside-the-box-ngc python -B -m run.plot_toy_model
+#
+# NVIDIA Recommended Flags:
+#   --gpus all           : Enable access to all GPUs
+#   --ipc=host           : Use host IPC for shared memory (faster data loading)
+#   --ulimit memlock=-1  : Remove memory lock limits (required for GPU memory pinning)
+#   --ulimit stack=67108864 : Increase stack size for deep neural networks
+#   -v ${PWD}:/app       : Mount your current directory into the container for code/data sharing (PowerShell)
+############################################################
