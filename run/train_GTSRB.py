@@ -15,7 +15,8 @@ def run_script():
         data_train_model = DataSpec(randomize=False, classes=classes)
         data_test_model = DataSpec(randomize=False, classes=classes)
         classes_string = classes2string(classes)
-        model_path = "CNY19id2_GTSRB_{}.h5".format(classes_string)
+        # model_path = "CNY19id2_GTSRB_{}.h5".format(classes_string)  # Original repo's naming convention
+        model_path = "CNY19id2_GTSRB_{}_New.h5".format(classes_string)  # Updated to match renamed model files with _New suffix
         if plot_name == "!":
             plot_name_current = classes_string
         else:

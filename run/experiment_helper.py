@@ -12,7 +12,8 @@ def load_instance(n_classes, total_classes, stored_network_name):
     data_test_monitor = DataSpec(randomize=False, classes=classes)
     data_run = DataSpec(randomize=False, classes=[k for k in range(0, total_classes)])
     classes_string = classes2string(classes)
-    model_path = "{}_{}.h5".format(stored_network_name, classes_string)
+    # model_path = "original/{}_{}.h5".format(stored_network_name, classes_string)  # Original repo's models
+    model_path = "{}_{}_New.h5".format(stored_network_name, classes_string)  # Updated to match renamed model files with _New suffix
 
     return data_train_model, data_test_model, data_train_monitor, data_test_monitor, data_run, model_path, \
         classes_string
