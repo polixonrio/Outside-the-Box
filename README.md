@@ -102,8 +102,15 @@ Before running any experiment scripts, you must train the required models. Follo
    - `run_experiment_novelty_variation.py`
    - `run_experiment_other_abstractions.py`
 
+
 Refer to the [Evaluation](#evaluation) section below to see which script produces which figure or table from the paper.
-All output files (CSVs, PDFs) are saved in the `outputs/` directory.
+
+### About the outputs folder
+The `outputs/` directory contains generated results from running experiments and scripts, including:
+- CSV files
+- PDF files with plots and figures
+
+It does not contain the four log files: `log_novelty_variation.txt`, `log_distance.txt`, `log_layer_variation.txt`, and `log_other_abstractions.txt`. These are generated while running the `run_experiment` script.
 
 # Citation
 

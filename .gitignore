@@ -1,10 +1,12 @@
 data/GTSRB/train.p
 test/
 log_novelty_variation.txt
+log_distance.txt
+log_layer_variation.txt
+log_other_abstractions.txt
 .venv/
 models/new
 .vscode/
 __pycache__/
 *.py[cod]
 *$py.class
-*.csv
