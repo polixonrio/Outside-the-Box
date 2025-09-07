@@ -103,7 +103,7 @@ Before running any experiment scripts, you must train the required models. Follo
    - `run_experiment_other_abstractions.py`
 
 
-Refer to the [Evaluation](#evaluation) section below to see which script produces which figure or table from the paper.
+Refer to the [Evaluation](#evaluation) section below to see which script produces which figure from the paper.
 
 ### About the outputs folder
 The `outputs/` directory contains generated results from running experiments and scripts, including:
