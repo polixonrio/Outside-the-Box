@@ -20,7 +20,14 @@ def run_explanation_alpha_thresholding():
                          model_path=model_path)
 
     # compute results
-    probabilities = model.predict_proba(data_run.x())
+    # Original approach (worked in older Keras versions but predict_proba was removed):
+    # confidences = model.predict_proba(data.x())
+    
+    # Updated approach: Use model.predict() which returns the same probability distributions
+    # In newer Keras versions, predict() does what predict_proba() used to do
+    # https://stackoverflow.com/questions/68971378/attributeerror-sequential-object-has-no-attribute-predict-proba
+    # probabilities = model.predict_proba(data_run.x())  
+    probabilities = model.predict(data_run.x())  # Fixed: Keras models use predict()
     ground_truths = data_run.ground_truths()
     x = 0
     y = 1
@@ -74,7 +81,8 @@ def run_explanation_alpha_thresholding():
     # ax.legend()
     title = "Alpha threshold"
     fig.suptitle(title)
-    ax.figure.canvas.set_window_title(title)
+    # ax.figure.canvas.set_window_title(title)  # Old matplotlib method
+    fig.canvas.manager.set_window_title(title)  # Fixed: Modern matplotlib method
 
     plt.show()
 

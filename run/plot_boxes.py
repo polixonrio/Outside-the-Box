@@ -7,7 +7,7 @@ def run_script():
     classes = [0, 1]
     n_classes = 2
     classes_string = classes2string(classes)
-    model_path = "{}_{}.h5".format(stored_network_name, classes_string)
+    model_path = "{}_{}_New.h5".format(stored_network_name, classes_string)
     data_train_model = DataSpec(randomize=False, classes=classes)
     data_test_model = DataSpec(randomize=False, classes=classes)
     data_train_monitor = DataSpec(randomize=False, classes=classes)

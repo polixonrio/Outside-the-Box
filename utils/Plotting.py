@@ -242,9 +242,11 @@ def plot_2d_projection(history, monitor, layer, category_title, ax=None, known_c
     ax.set_xlabel("x{:d}".format(x), size=16)
     ax.set_ylabel("x{:d}".format(y), size=16)
     for tick in ax.xaxis.get_major_ticks():
-        tick.label.set_fontsize(16)
+        # tick.label.set_fontsize(16)  # Old API that fails in modern matplotlib
+        tick.label1.set_fontsize(16)  # Fixed: Use label1 instead of label
     for tick in ax.yaxis.get_major_ticks():
-        tick.label.set_fontsize(16)
+        # tick.label.set_fontsize(16)  # Old API that fails in modern matplotlib  
+        tick.label1.set_fontsize(16)  # Fixed: Use label1 instead of label
 
     # create mapping 'class -> values'
     class2values = dict()

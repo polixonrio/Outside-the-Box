@@ -19,7 +19,7 @@ COPY . .
 # docker run ... outside-the-box-ngc python run/train_CIFAR.py
 
 # USAGE INSTRUCTIONS:
-# Build: docker build -t outside-the-box-ngc -f Dockerfile.ngc .
+# Build: docker build -t outside-the-box-ngc -f Dockerfile .
 # 
 # Production Run:
 # docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm outside-the-box-ngc
